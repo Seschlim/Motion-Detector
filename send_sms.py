@@ -1,3 +1,5 @@
+""" send_sms.py: Use the Twilio SMS API to send text alerts to a target phone number. """
+
 from twilio.rest import Client
 import config as cfg
 

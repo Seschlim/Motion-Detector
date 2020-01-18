@@ -1,3 +1,5 @@
+""" mpu6050.py: Configures and read/writes to an MPU6050 accelerometer/gyroscope. """
+
 import smbus			
 
 class MPU6050():
@@ -32,19 +34,19 @@ class MPU6050():
 
     def start(self):
         # Disable Digital Low-Pass Filter, Gyroscope Output Rate = 8kHz
-	    self.bus.write_byte_data(self.ADDRESS, self.CONFIG, 0)
+        self.bus.write_byte_data(self.ADDRESS, self.CONFIG, 0)
 
-	    # Sample Rate = Gyroscope Output Rate / (1 + SMPLRT_DIV) = 1kHz
-	    self.bus.write_byte_data(self.ADDRESS, self.SMPLRT_DIV, 7)
-	
-	    # Use interal 8MHz oscillator for clock
-	    self.bus.write_byte_data(self.ADDRESS, self.PWR_MGMT_1, 1)
-	
-	    # Full scale range = +/- 2000 deg/s
-	    self.bus.write_byte_data(self.ADDRESS, self.GYRO_CONFIG, 24)
+        # Sample Rate = Gyroscope Output Rate / (1 + SMPLRT_DIV) = 1kHz
+        self.bus.write_byte_data(self.ADDRESS, self.SMPLRT_DIV, 7)
+        
+        # Use interal 8MHz oscillator for clock
+        self.bus.write_byte_data(self.ADDRESS, self.PWR_MGMT_1, 1)
+        
+        # Full scale range = +/- 2000 deg/s
+        self.bus.write_byte_data(self.ADDRESS, self.GYRO_CONFIG, 24)
 
     def read_raw_data(self, addr):
-	    # Accel and gyro value are 16-bit
+	# Accel and gyro value are 16-bit
         # Ex: ACCEL_XOUT_H = 3B, ACCEL_XOUT_L = 3C
         high_bits = self.bus.read_byte_data(self.ADDRESS, addr)
         low_bits = self.bus.read_byte_data(self.ADDRESS, addr + 1)

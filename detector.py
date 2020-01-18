@@ -45,7 +45,7 @@ class Detector():
                     # Get the current time (UTC)
                     self.time = str(datetime.datetime.now())
 
-		            # Format the alert message
+		    # Format the alert message
                     self.msg = "ALERT: Motion detected at " + self.time[11:19]
 
                     # Print and send the alert
